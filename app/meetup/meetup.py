@@ -28,6 +28,7 @@ class Meetup(object):
         return data
 
 
+
     def eventos_all(self, access_token):
         eventos = []
         meetups = ['PHPSP-Santos', 'MovimentoBaixadaNerd', 'QA-Caiçara', 'dotnet-Sao-Paulo']
@@ -70,3 +71,8 @@ class Meetup(object):
                             })
         # print(r.json())
         return r.json()
+
+    
+        
+
+

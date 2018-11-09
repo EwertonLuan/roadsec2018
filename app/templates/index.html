@@ -3,9 +3,18 @@
         <title>OAuth Flask Demo</title>
     </head>
     <body>
-        <h1>OAuth Demo</h1>
-
-            <h2>I don't know you!</h2>
-            <p><a href="{{ url_for('login') }}">Login with Facebook</a></p>     
+        <h1>OAuth Flask Demo</h1>
+            <li><h1>Meetups</h1>
+                <ul>
+                    <li><a href="{{url_for('eventos', meetup='PHPSP-Santos')}}">PHPSP-Santos</a></li>
+                    <li><a href="{{url_for('eventos', meetup='MovimentoBaixadaNerd')}}">MovimentoBaixadaNerd</a></li>
+                    <li><a href="{{url_for('eventos', meetup='QA-Caiçara')}}">QA-Caiçara</a></li>
+                    <li><a href="{{url_for('eventos', meetup='dotnet-Sao-Paulo')}}">dotnet-Sao-Paulo</a></li>
+                    <li><a href="{{url_for('eventos_geral')}}">Eventos Geral</a></li>
+                </ul>
+            </li>
+            <h2>Login</h2>                      
+            <a href="{{ url_for('login') }}"><button>Login Meetup</button></a>
+            <a href="{{url_for('logoff')}}" ><button>Logoff Meetup</button></a>
     </body>
 </html>
