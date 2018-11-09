@@ -1,10 +1,11 @@
 import requests
+from urllib import parse
 
 class Meetup(object):
-    def eventos_by_meetup(self, meetup):
+    def eventos_by_meetup(self, meetup, access_token):
         data = []
         url = 'https://api.meetup.com/' + meetup + '/events?&status=upcoming'
-        access_token = '{3f3c377256781b4a2d852d4f7e1017}'
+
         headers = {
             'Authorization': 'Bearer' + access_token,
             'sign': 'True',
@@ -26,19 +27,46 @@ class Meetup(object):
                 data.append(data_events)
         return data
 
-    def eventos_all(self):
+
+    def eventos_all(self, access_token):
         eventos = []
         meetups = ['PHPSP-Santos', 'MovimentoBaixadaNerd', 'QA-Caiçara', 'dotnet-Sao-Paulo']
         for meetup in meetups:
-            result = self.eventos_by_meetup(meetup)
+            result = self.eventos_by_meetup(meetup, access_token)
             for evento in result:
                 eventos.append(evento)
         return eventos
 
-    def eventos_meetup(self, meetup):
+    def eventos_meetup(self, meetup, access_token):
         print("start")
         eventos = []
-        result = self.eventos_by_meetup(meetup)
+        result = self.eventos_by_meetup(meetup, access_token)
         for evento in result:
             eventos.append(evento)
         return eventos
+
+    def authorize_access(self):
+
+        params = {'response_type':'code',
+                    'client_id':'lklk38nu460hho48rr9sisa9qg',
+                    'redirect_uri':'http://localhost:5000/login'}
+
+        url = 'https://secure.meetup.com/oauth2/authorize'
+
+        params = parse.urlencode(params)
+
+        url_autorization = url+'?'+params
+
+        return url_autorization
+
+    def get_acees_token(self, code):
+
+        r = requests.post('https://secure.meetup.com/oauth2/access',
+                        data={'client_id':'lklk38nu460hho48rr9sisa9qg',
+                            'client_secret':'f0662cchdctub86gg5qrpi6geo',
+                            'grant_type': 'authorization_code',
+                            'redirect_uri': 'http://localhost:5000/login',
+                            'code': code
+                            })
+        # print(r.json())
+        return r.json()
