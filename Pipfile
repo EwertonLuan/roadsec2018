@@ -17,7 +17,7 @@ werkzeug = "==0.12.2"
 gunicorn = "*"
 flask-restplus="*"
 requests = "*"
-flask_cors="*"
+pyjwt = "*"
 
 [requires]
 python_version = "3.4"
